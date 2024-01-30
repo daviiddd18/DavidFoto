@@ -223,4 +223,12 @@ form .avatar{
     cursor: pointer;
 }
 
+a.user-link-gente {
+    color: inherit;
+    text-decoration: none;
+}
 
+a.user-link-gente:hover {
+    color: inherit;
+    text-decoration: none;
+}
