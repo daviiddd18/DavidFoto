@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use App\Models\User;
 
 class UserController extends Controller{
 
@@ -66,6 +67,28 @@ class UserController extends Controller{
 
         $file = Storage::disk('users')->get($filename);
         return new Response($file, 200);
+    }
+
+    public function profile($id) {
+
+        $user = User::with('images')->findOrFail($id);
+
+        return view('user.profile', ['user' => $user]);
+    }
+    public function index($search = null) {
+        if (!empty($search)) {
+            $users = User::where('nick', 'LIKE', '%'.$search.'%')
+                ->orWhere('name','LIKE', '%'.$search.'%')
+                ->orWhere('surname','LIKE', '%'.$search.'%')
+                ->orderBy('id','desc')
+                ->paginate(5);
+        } else {
+            $users = User::orderBy('id','desc')->paginate(5);
+        }
+
+        return view('user.index', [
+            'users' => $users
+        ]);
     }
 
 }

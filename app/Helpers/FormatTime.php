@@ -63,6 +63,6 @@ class FormatTime {
             }
         }
 
-        return "Hace " . $result;
+        return $result;
     }
 }

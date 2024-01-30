@@ -32,6 +32,13 @@ form .avatar{
     height: 100%;
     object-fit: cover;
     object-position: center;
+    max-width: 100%;
+}
+.container-avatar-edit img{
+    width: 100%;
+
+    width: 100px;
+
 }
 
 .pub_image{
@@ -49,6 +56,7 @@ form .avatar{
 }
 
 .pub_image .nickname{
+    margin-left: 5px;
     color:rgb(58, 0, 194);
 }
 
@@ -60,7 +68,7 @@ form .avatar{
 
 .image-container img{
     width: 100%;
-
+    max-width: 100%;
 }
 
 .pub_image .card-body{
@@ -90,7 +98,7 @@ form .avatar{
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 20px;
+    padding-left: 15px;
 }
 
 .comments-likes img {
@@ -104,7 +112,7 @@ form .avatar{
 }
 
 .image-description{
-    margin-top: -5px;
+    margin-top: 5px;
 }
 
 .icono-description{
@@ -160,3 +168,59 @@ form .avatar{
     color: rgb(98, 98, 98);
     font-weight: bold;
 }
+
+.profile-user .container-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 900px;
+    overflow: hidden;
+    float: left;
+}
+
+.profile-user .container-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.profile-user .user-info {
+    float: left;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+.btn-search {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        text-align: right;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-avatar {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
+
+.actions{
+    display: flex;
+    float: right;
+    margin-right: 10px;
+
+}
+.lapiz-foto{
+    margin-right: 8px;
+}
+
+.papelera-foto:hover {
+    cursor: pointer;
+}
+
+
