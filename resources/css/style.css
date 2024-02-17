@@ -232,3 +232,11 @@ a.user-link-gente:hover {
     color: inherit;
     text-decoration: none;
 }
+
+.sin-foto{
+    display: flex;
+    width: 400px;
+    height: 400px;
+    align-items: center;
+    justify-content: flex-end;
+}
