@@ -67,6 +67,9 @@
                                 <a href="{{ route('user.index') }}" class="nav-link">Gente</a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ route('user.followers') }}" class="nav-link">Follow</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ route('image.create') }}" class="nav-link">Subir imagen</a>
                             </li>
                             <li>

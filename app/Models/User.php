@@ -52,5 +52,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Image');
     }
 
+    public function followers() {
+
+        return $this->hasMany(Follower::class, 'followed_user_id');
+    }
+
+    public function following() {
+
+        return $this->hasMany(Follower::class, 'user_id');
+    }
 
 }

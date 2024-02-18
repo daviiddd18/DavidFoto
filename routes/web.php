@@ -19,6 +19,7 @@ Route::post('/user/update', [App\Http\Controllers\UserController::class, 'update
 Route::get('/user/avatar/{filename}', [App\Http\Controllers\UserController::class, 'getImage'])->name('user.avatar');
 Route::get('/perfil/{id}', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
 Route::get('/gente/{search?}', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
+Route::get('/follow', [App\Http\Controllers\FollowerController::class, 'index'])->name('user.followers');
 
 //IMÁGENES
 Route::get('/subir-imagen', [App\Http\Controllers\ImageController::class, 'create'])->name('image.create');
