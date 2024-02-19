@@ -30,16 +30,19 @@ class FollowerController extends Controller
 
         $user = \Auth::user();
 
-        $isset_follower = Follower::where('user_id', $user->id)->where('followed_id', $followed_user_id)->count();
+        $isset_follower = Follower::where('user_id', $user->id)->where('followed_user_id', $followed_user_id)->count();
 
         if ($isset_follower == 0) {
             $follower = new Follower();
             $follower->user_id = $user->id;
             $follower->followed_user_id = (int) $followed_user_id;
 
-            //guardar
             $follower->save();
-            return response()->json(['follower' => $follower]);
+            return response()->json([
+                'following' => true,
+                'follower' => $follower,
+                'message' => 'Has seguido a esta persona'
+            ]);
 
         } else {
             echo "Ya sigues a esta persona.";
@@ -51,7 +54,7 @@ class FollowerController extends Controller
 
         $user = \Auth::user();
 
-        $follower = Follower::where('user_id', $user->id)->where('followed_id', $followed_user_id)->first();
+        $follower = Follower::where('user_id', $user->id)->where('followed_user_id', $followed_user_id)->first();
 
         if ($follower) {
 
@@ -59,7 +62,7 @@ class FollowerController extends Controller
 
             return response()->json([
                 'follower' => $follower,
-                'message' => 'Has deja de seguir'
+                'message' => 'Has dejado de seguir'
             ]);
 
         } else {

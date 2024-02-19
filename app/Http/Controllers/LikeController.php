@@ -24,7 +24,7 @@ class LikeController extends Controller
     }
 
     public function like($image_id){
-        //recoger datos del usuario
+
         $user = \Auth::user();
 
         $isset_like = Like::where('user_id', $user->id)->where('image_id', $image_id)->count();
@@ -34,7 +34,6 @@ class LikeController extends Controller
             $like->user_id = $user->id;
             $like->image_id = (int)$image_id;
 
-            //guardar
             $like->save();
             return response()->json(['like' => $like]);
 

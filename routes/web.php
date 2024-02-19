@@ -19,7 +19,9 @@ Route::post('/user/update', [App\Http\Controllers\UserController::class, 'update
 Route::get('/user/avatar/{filename}', [App\Http\Controllers\UserController::class, 'getImage'])->name('user.avatar');
 Route::get('/perfil/{id}', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
 Route::get('/gente/{search?}', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
-Route::get('/follow', [App\Http\Controllers\FollowerController::class, 'index'])->name('user.followers');
+Route::get('/follows', [App\Http\Controllers\FollowerController::class, 'index'])->name('user.followers');
+Route::get('/follow/{followed_user_id}', [App\Http\Controllers\FollowerController::class, 'follow'])->name('follow.save');
+Route::get('/unfollow/{followed_user_id}', [App\Http\Controllers\FollowerController::class, 'unfollow'])->name('follow.delete');
 
 //IMÁGENES
 Route::get('/subir-imagen', [App\Http\Controllers\ImageController::class, 'create'])->name('image.create');

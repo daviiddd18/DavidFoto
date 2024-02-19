@@ -240,3 +240,15 @@ a.user-link-gente:hover {
     align-items: center;
     justify-content: flex-end;
 }
+
+.data-user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.follow-unfollow{
+    margin-left: auto;
+}
+
+

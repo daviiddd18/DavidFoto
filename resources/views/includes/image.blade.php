@@ -7,13 +7,27 @@
             </div>
         @endif
 
-        <div class="data-user">
-            {{ $image->user->name . ' ' . $image->user->surname . ' | ' }}
-            <a href="{{ route('profile', ['id' => $image->user->id]) }}" class="user-link">
+        <div class="data-user" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                {{ $image->user->name . ' ' . $image->user->surname . ' | ' }}
                 <a href="{{ route('profile', ['id' => $image->user->id]) }}" class="user-link">
-                <span class="nickname">{{ '@' . $image->user->nick }}</span>
-            </a>
-            </a>
+                    <span class="nickname">{{ '@' . $image->user->nick }}</span>
+                </a>
+            </div>
+            <span class="follow-unfollow">
+                @php
+                    $user_follow = Auth::user() ? $image->user->followers->contains('user_id', Auth::user()->id) : false;
+                @endphp
+
+                @if (Auth::check() && Auth::user()->id !== $image->user->id)
+                    @if ($user_follow)
+                        <button class="btn btn-sm btn-danger btn-unfollow" data-id="{{ $image->user->id }}">Unfollow</button>
+                    @else
+                        <button class="btn btn-sm btn-primary btn-follow" data-id="{{ $image->user->id }}">Follow</button>
+                    @endif
+                @endif
+            </span>
+
         </div>
 
     </div>
