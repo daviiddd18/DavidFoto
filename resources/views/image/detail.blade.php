@@ -40,7 +40,8 @@
                                         Hace {{ \FormatTime::LongTimeFilter($image->created_at) }}
                                     @endif
                                 </span>
-                                @if (Auth::user() && Auth::user()->id == $image->user->id)
+                                @if (Auth::user() && (Auth::user()->id == $image->user->id || Auth::user()->role == 'admin'))
+
                                     <div class="actions">
                                         <a href="{{ route('image.edit', ['id' => $image->id])  }}">
                                             <img src="{{ asset('img/lapiz.png') }}" alt="Editar publicación"

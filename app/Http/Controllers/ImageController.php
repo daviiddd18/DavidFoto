@@ -10,6 +10,7 @@ use App\Models\Image;
 use Illuminate\Http\Response;
 use App\Models\Comment;
 use App\Models\Like;
+use App\Models\Log;
 
 class ImageController extends Controller{
 
@@ -72,40 +73,43 @@ class ImageController extends Controller{
         ]);
     }
 
-    public function delete($id){
-        $user = \Auth::user();
-        $image = Image::find($id);
-        $comments = Comment::where('image_id', $id)->get();
-        $likes = Like::where('image_id', $id)->get();
+    public function delete(Request $request, $id)
+{
+    $user = \Auth::user();
+    $image = Image::find($id);
+    $comments = Comment::where('image_id', $id)->get();
+    $likes = Like::where('image_id', $id)->get();
 
-        if ($user && $image && $image->user->id == $user->id) {
-            //Eliminar commentarios
-            if ($comments && count($comments) >= 1) {
-                foreach ($comments as $comment) {
-                    $comment->delete();
-                }
-            }
-            //Eliminar likes
-            if ($likes && count($likes) >= 1) {
-                foreach ($likes as $like) {
-                    $like->delete();
-                }
-            }
-            //Eliminar imagenes
-            Storage::disk('images')->delete($image->image_path);
+    if ($user && $image && $image->user->id == $user->id) {
 
-            //Eliminar registro imagen
-
-            $image->delete();
-
-            $message = array('message' => 'La imagen se ha borrado correctamente');
-        }else{
-            $message = array('message' => 'La imagen no se ha borrado');
+        foreach ($comments as $comment) {
+            $comment->delete();
         }
 
-        return redirect('/')->with($message);
+        foreach ($likes as $like) {
+            $like->delete();
+        }
+
+        Storage::disk('images')->delete($image->image_path);
+
+        $image->delete();
+
+        $message = array('message' => 'La imagen se ha borrado correctamente.');
+
+
+        $logEntry = new Log();
+        $logEntry->user_id = $user->id;
+        $logEntry->action = 'Eliminar imagen';
+        $logEntry->ip = $request->ip();
+        $logEntry->table_name = 'images';
+        $logEntry->table_id = $id;
+        $logEntry->save();
+    } else {
+        $message = array('message' => 'La imagen no se ha borrado.');
     }
 
+    return redirect('/')->with($message);
+}
     public function edit($id){
         $user = \Auth::user();
         $image = Image::find($id);
@@ -119,7 +123,8 @@ class ImageController extends Controller{
 
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         // Validación
         $validate = $this->validate($request, [
             'description' => 'required',
@@ -127,8 +132,8 @@ class ImageController extends Controller{
         ]);
 
         $image_id = $request->input('image_id');
-        $image_path = $request->file('image_path');
         $description = $request->input('description');
+        $image_path = $request->file('image_path');
 
         $image = Image::find($image_id);
         $image->description = $description;
@@ -143,6 +148,15 @@ class ImageController extends Controller{
         }
 
         $image->update();
+
+        // Registrar la acción en el sistema de logs
+        $logEntry = new Log();
+        $logEntry->user_id = auth()->id();
+        $logEntry->action = 'Actualizar imagen';
+        $logEntry->ip = $request->ip();
+        $logEntry->table_name = 'images';
+        $logEntry->table_id = $image->id;
+        $logEntry->save();
 
         return redirect()->route('image.detail', ['id' => $image_id])->with(['message'=> 'Imagen actualizada con éxito']);
     }

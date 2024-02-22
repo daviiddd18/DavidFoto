@@ -27,7 +27,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    David Foto
+                    DavidFoto
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -114,6 +114,21 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <div class="container">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-1 my-2 border-top">
+              <p class="col-md-4 mb-0 text-muted">&copy; 2024 DavidFoto</p>
+
+              <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+              </a>
+
+              <ul class="nav col-md-4 justify-content-end">
+                <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Inicio</a></li>
+                <li class="nav-item"><a href="/faqs" class="nav-link px-2 text-muted">FAQs</a></li>
+                <li class="nav-item"><a href="/aboutus" class="nav-link px-2 text-muted">Sobre Nosotros</a></li>
+              </ul>
+            </footer>
+          </div>
     </div>
 </body>
 

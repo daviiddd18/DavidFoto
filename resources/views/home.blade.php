@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-4">
-
+                <span>Welcome, {{ Auth::user()->name }}</span>
                 @include('includes.message')
                 @foreach ($images as $image)
                     @include('includes.image', ['image' => $image])

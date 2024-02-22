@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Image;
 
 Route::get('/', function () {
 
@@ -41,7 +40,9 @@ Route::get('/like/{image_id}', [App\Http\Controllers\LikeController::class, 'lik
 Route::get('/dislike/{image_id}', [App\Http\Controllers\LikeController::class, 'dislike'])->name('like.delete');
 Route::get('/likes', [App\Http\Controllers\LikeController::class, 'index'])->name('likes');
 
-
+//Footer
+Route::get('/faqs', [App\Http\Controllers\FooterController::class, 'faqs'])->name('footer.faqs');
+Route::get('/aboutus', [App\Http\Controllers\FooterController::class, 'about'])->name('footer.about');
 
 
 
